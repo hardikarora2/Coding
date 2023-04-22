@@ -1,0 +1,48 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        
+        // iterate on the strs array 
+        List<List<String>> ans = new ArrayList<>();
+        HashMap<String,ArrayList<String>> hm = new HashMap<>();
+        for(String s: strs)
+        {
+            char ch[] = s.toCharArray();
+            // converted to char array 
+            Arrays.sort(ch);
+            // sorted the char array
+            String sorted_s = new String(ch);
+            // converted the sorted array to the string 
+
+
+            // check for the sorted string as the key in the hm 
+            if(hm.containsKey(sorted_s))
+            {
+                ArrayList<String> al = hm.get(sorted_s);
+                // got the list of anagrams
+                al.add(s);
+                // add my string s to the list of anagrams
+                hm.put(sorted_s,al);
+                // inserted the new al in the hm
+            }
+            else
+            {
+                ArrayList<String> al = new ArrayList<>();
+                // made a new al
+                al.add(s);
+                // add my string s to the list 
+                hm.put(sorted_s,al);
+            }
+            // System.out.println(sorted_s);
+        }
+
+        //after this I have a hm in which infront of key I have the list of anagrams
+
+        for(String s : hm.keySet())
+        {
+            // s si my sorted string
+            ans.add(hm.get(s));
+        }
+
+        return ans;
+    }
+}
